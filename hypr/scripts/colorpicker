@@ -1,0 +1,37 @@
+#!/bin/bash
+
+# Lock file path
+LOCKFILE=/tmp/color_picker.lock
+
+# Create a lock file if it doesn't exist, or exit if it does
+if [ -e "$LOCKFILE" ]; then
+    echo "Script is already running. Exiting."
+    exit 1
+else
+    touch "$LOCKFILE"
+fi
+
+# Cleanup on exit
+cleanup() {
+    rm -f "$LOCKFILE"
+}
+trap cleanup EXIT
+
+check_dependencies() {
+    ! command -v hyprpicker &>/dev/null &&
+        notify-send -u critical -a "Color Picker" xcolor-pick "hyprpicker needs to be installed" && exit 1
+
+    ! command -v magick &>/dev/null &&
+        notify-send -u critical -a "Color Picker" xcolor-pick "imagemagick needs to be installed" && exit 1
+}
+
+main() {
+    CMD=$(hyprpicker -a -n) || exit 1
+    TMP="/tmp/xcolor_${CMD}.png"
+
+    magick -size 120x120 xc:"$CMD" "$TMP"
+    notify-send -a "Color Picker" -i "$TMP" 
+}
+
+check_dependencies
+main

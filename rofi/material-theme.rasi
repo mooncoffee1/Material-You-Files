@@ -1,0 +1,101 @@
+@import "colors.rasi"
+
+* {
+    font:   "Iosevka 10";
+
+    bg0:     @surface;
+    bg1:     @surface-bright;
+    fg0:     @primary-fixed;
+
+    accent-color:     @primary;
+    urgent-color:     @tertiary;
+
+    background-color:   transparent;
+    text-color:         @fg0;
+
+    margin:     0;
+    padding:    0;
+    spacing:    0;
+}
+
+window {
+    location:   center;
+    width:      480;
+    background-color:   @bg0;
+    border-radius: 26px;
+    padding: 10px;
+    border: 2px;
+    border-color: @surface-container;
+}
+
+inputbar {
+    spacing:    8px;
+    padding:    12px;
+    border-radius: 22px;
+    background-color:   @bg1;
+}
+
+prompt, entry, element-icon, element-text {
+    vertical-align: 0.5;
+}
+
+prompt {
+    text-color: @accent-color;
+}
+
+textbox {
+    padding:            12px;
+    background-color:   @bg1;
+    border-radius:      22px;
+}
+
+listview {
+    padding:    8px 0;
+    lines:      8;
+    columns:    1;
+    fixed-height:   false;
+}
+
+element {
+    padding:    10px;
+    spacing:    10px;
+    border-radius: 20px;
+}
+
+element normal normal {
+    text-color: @fg0;
+}
+
+element normal urgent {
+    text-color: @urgent-color;
+}
+
+element normal active {
+    text-color: @accent-color;
+}
+
+element alternate active {
+    text-color: @accent-color;
+}
+
+element selected {
+    text-color: @bg0;
+}
+
+element selected normal, element selected active {
+    background-color:   @accent-color;
+    border-radius: 20px;
+}
+
+element selected urgent {
+    background-color:   @urgent-color;
+    border-radius: 10px;
+}
+
+element-icon {
+    size:   0.8em;
+}
+
+element-text {
+    text-color: inherit;
+}
