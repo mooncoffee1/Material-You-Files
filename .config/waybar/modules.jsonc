@@ -31,12 +31,17 @@
   },
   
   "temperature": {
+    "interval": 5,
+    "tooltip": false,
     // "thermal-zone": 2,
     // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
     "critical-threshold": 75,
     // "format-critical": "{temperatureC}°C ",
-    "format": "󰔏 {temperatureC}°C",
-    "on-click": "~/.config/hypr/scripts/gamemode"
+    "format": "󱃃 {temperatureC}",
+    "format-warning": "󰔏 {temperatureC}",
+    "format-critical": "󱃂 {temperatureC}",
+    
+    //"on-click": "~/.config/hypr/scripts/gamemode"
 },
   "memory": {
     "format": "󰍛 {:2}",

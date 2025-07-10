@@ -16,7 +16,7 @@
   
   "modules-center": [
     "memory",
-    "cpu",
+    "temperature",
     "hyprland/workspaces",
     "group/time-info"
   ],

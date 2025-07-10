@@ -41,6 +41,7 @@ tooltip label {
   margin: 10px 4px;
 }
 
+#temperature,
 #cpu,
 #memory{
   padding: 4px 10px;
@@ -50,10 +51,12 @@ tooltip label {
   border-radius: 12px;
 }
 
-#temperature.critical {
-  background: alpha(darker(@color9), 0.8);
-  color: @color0;
+#temperature.warning {
+  color: @error;
+}
 
+#temperature.critical {
+  color: darker(@error);
 }
 
 #workspaces {
@@ -199,17 +202,10 @@ tray > .passive {
   background-color: @error;
 }
 
-@keyframes mpris-gradient {
-  0%   { color: @primary; }
-  50%  { color: @tertiary; }
-  100% { color: @error; }
-}
-
 #mpris {
   padding: 4px 10px;
   margin: 7.9px 2px;
   border-radius: 10px;
-  transition: color 1s ease-in-out;
 }
 
 #mpris.playing {
@@ -368,7 +364,6 @@ padding-right: 16px;
 #custom-gpu-usage:hover,
 #custom-screenrecorder:hover,
 #temperature:hover,
-#cpu:hover,
 #memory:hover,
 #disk:hover,
 #custom-updates:hover,
