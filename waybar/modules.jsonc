@@ -1,13 +1,15 @@
 {
   "hyprland/window": {
     "format": "󰣆 {title}",
-    "max-length": 80,
+    "max-length": 20,
+    "icon-size": 16,
     "separate-outputs": false,
+    "tooltip": false,
     "rewrite": {
       "^.*( — Firefox|Firefox)$": "󰈹 Firefox",
       "^.*v( .*|$)": " Neovim",
       "^.*~$": "󰄛 Kitty",
-      "(.*) ": "󰣇 Desktop",
+      "(.*) ": "󰮯 Desktop",
       "^.*( — Google Chrome|Google Chrome)$": "󰊯 Google Chrome",    
     },
   },
@@ -20,11 +22,11 @@
     "modules": ["custom/arrow-right", "cpu",  "memory", "disk", "temperature", "custom/updates"],
   },
   "custom/arrow-right": {
-    "format": "󰁔",
+    "format": "󰁎",
     "tooltip": false,
   },
   "cpu": {
-    "format": "󰘚 {usage}󱉸",
+    "format": "󰘚 {usage}",
     "on-click": "$HOME/.config/hypr/scripts/disable-typing",
   },
   
@@ -37,7 +39,9 @@
     "on-click": "~/.config/hypr/scripts/gamemode"
 },
   "memory": {
-    "format": "󰍛 {:2}󱉸",
+    "format": "󰍛 {:2}",
+    "tooltip": false,
+
   },
   "disk": {
     "interval": 600,
@@ -48,21 +52,29 @@
     "format": "{} {icon}",
     "return-type": "json",
     "format-icons": {
-        "has-updates": "󱍷",
-        "updated": "󰂪"
+        "has-updates": "󰏖",
+        "updated": "󰮯"
     },
     "exec-if": "which waybar-module-pacman-updates",
     "exec": "waybar-module-pacman-updates  --interval-seconds 5 --network-interval-seconds 300"
 },
-  "hyprland/workspaces": {
-    "format": "{name}",
-    "on-click": "activate",
-    "all-outputs": true,
-  },
+"hyprland/workspaces": {
+	"format": "{icon}",
+	"format-icons": {
+		"active": "󰮯",
+		"default": "󰊠",
+    "empty": "󱱕"
+
+	},
+	"persistent-workspaces": {
+		"*": 10, // 5 workspaces by default on every monitor
+		"HDMI-A-1": 3 // but only three on HDMI-A-1
+	}
+},
   "group/control-center": {
     "orientation": "inherit",
     "on-click": "swaync-client -t -sw",
-    "modules": [ "privacy","group/audio", "group/connection", "group/batterys", "group/light","group/notifis"],
+    "modules": [ "privacy","group/audio", "group/connection", "group/batterys"],
   },
   "privacy": {
 	"icon-spacing": 14,
@@ -179,6 +191,7 @@
   "network": {
     "format": "{icon}",
     "tooltip": false,
+        "interval": 2,
     "format-icons": {
       "wifi": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
       "ethernet": ["󰈁"],
@@ -227,21 +240,33 @@
   },
   "group/hub": {
     "orientation": "inherit",
-    "modules": ["group/utils",  "clock"],
+    "modules": ["group/utils"],
   },
   "group/utils": {
     "orientation": "inherit",
     "drawer": {
       "transition-duration": 600,
       "transition-left-to-right": true,
-      "click-to-reveal": false,
+      "click-to-reveal": true,
     },
-    "modules": ["custom/arrow-left", "group/idle", "gamemode",  "hyprland/language", "tray"],
+    "modules": ["custom/arrow-left", "group/idle", "custom/updates", "gamemode", "tray"],
   },
   "custom/arrow-left": {
-    "format": "󰁍",
+    "format": "󰁎",
     "tooltip": false,
   },
+
+  "custom/media": {
+    "format": "{icon}{}",
+    "return-type": "json",
+    "format-icons": {
+        "Playing": " ",
+        "Paused": " ",
+    },
+    "max-length":70,
+    "exec": "playerctl -a metadata --format '{\"text\": \"{{playerName}}: {{artist}} - {{markup_escape(title)}}\", \"tooltip\": \"{{playerName}} : {{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F",
+    "on-click": "playerctl play-pause",
+},
 
   "group/gpu": {
     "orientation": "inherit",
@@ -313,7 +338,7 @@
 
   "custom/notifi-name": {
     "format": "Notifications",
-    "tooltip": true,
+    "tooltip": false,
     "tooltip-format": "Click to reveal notification center",
     "on-click": "swaync-client -t -sw",
   },
@@ -339,8 +364,15 @@
     "exec": "python ~/.config/waybar/scripts/weather.py",
     "restart-interval": 300,
     "return-type": "json",
-    "on-click": "xdg-open https://weather.com/en-IN/weather/today/l/$(location_id)",
-   "format-alt": "{alt}"
+    "on-click": "xdg-open https://weather.com/en-IN/weather/today/l/f0e0d6290703e313e21b7081d55a91301a340511d90252504613352a99a82ab6"
+},
+
+"user": {
+        "format": "{user}",
+        "interval": 60,
+        "height": 15,
+        "width": 15,
+        "icon": true,
 },
 
 "group/theme-switcher": {
@@ -365,9 +397,14 @@
     "tooltip-format": "Click to refresh the pywal/theme!",
     "on-click": "~/.config/hypr/scripts/wallpaper",
   },
+    "group/time-info": {
+    "orientation": "inherit",
+    "modules": [ "clock", "custom/weather"],
+  },
+
   "clock": {
-    "format": "{:%H:%M}",
-    "format-alt": "{:%A %d.%m}",
+    "tooltip": false,
+    "format": "{:%H:%M 󰧟 %A, %d/%m} 󰧟",
     "tooltip-format": "<tt><big>{calendar}</big></tt>",
     "calendar": {
       "mode": "month",
@@ -406,12 +443,14 @@
 
   "battery": {
     "on-click": "swaync-client -t -sw",
+        "tooltip": false,
     "states": {
       "good": 60,
       "warning": 30,
       "critical": 15
     },
     "format": "{icon}",
+    "interval": 2,
     "format-charging": "󱐋",
     "format-full": "<span color='#82A55F'><b>{icon}</b></span>",
     "format-icons": [
@@ -428,41 +467,50 @@
     "tooltip-format": " 󱟞 {timeTo} | {power} W"
   },
   "battery#capacity": {
+        "tooltip": false,
     "states": {
       "good": 95,
       "warning": 30,
       "critical": 15
     },
     "format": "{capacity}",
-    "on-click": "resources",
+    "on-click": "swaync-client -t -sw",
 
-    "tooltip-format": " 󱟞 {timeTo} | {power} W"
+    "tooltip-format": " {timeTo} | {power} W"
 
   },
   "tray": {
-    "icon-size": 14,
-    "spacing": 16,
+    "icon-size": 12,
+    "spacing": 18,
 },
 "power-profiles-daemon": {
-  "format": "{icon} {profile}",
+  "format": "{icon}",
   "tooltip-format": "Power profile: {profile}",
   "tooltip": false,
   "format-icons": {
     "default": "󰈐",
-    "performance": "󰓅",
-    "balanced": "󰾅",
-    "power-saver": "󰾆"
+    "performance": "󰈸 Power",
+    "balanced": "󰊠 Normal",
+    "power-saver": "󰌪 Saver"
   }
 },
-  "custom/waybar-mpris": {
-    "return-type": "json",
-    "tooltip": false,
-    "max-length": 30,
-    "exec": "waybar-mpris --position --autofocus --pause 󰏤 --play 󰐊",
-    "on-click": "sleep 0.1; waybar-mpris --send toggle",
-    "on-click-right": "sleep 0.1; playerctl next",
-    "escape": true,
+"mpris": {
+	"format": "{player_icon} {title}",
+	"format-paused": "{status_icon} <i>{title}</i>",
+  "max-length": 35,
+	"player-icons": {
+		"default": "󰏤",
+		"mpv": "🎵",
+    "spotify": "󰓇",
+    "gapless": "󰎆",
+    "vlc": "󰕼"
+	},
+	"status-icons": {
+		"paused": "󰐊"
+	},
+	// "ignored-players": ["firefox"]
 },
+
 "cava": {
 //        "cava_config": "$XDG_CONFIG_HOME/cava/cava.conf",
         "framerate": 144,
@@ -497,7 +545,7 @@
 
 "backlight": {
   "device": "nvidia_wmi_ec_backlight",
-  "on-click": "com.sidevesh.Luminance",
+  "on-click": "swaync-client -t -sw",
   "rotate": 0,
   "tooltip": false,
   "format": "{icon}",
@@ -508,7 +556,7 @@
 
 "backlight#volume": {
   "device": "nvidia_wmi_ec_backlight",
-  "on-click": "com.sidevesh.Luminance",
+  "on-click": "swaync-client -t -sw",
   "rotate": 0,
   "tooltip": false,
   "format": "{percent}",
@@ -528,16 +576,18 @@
 },
 "idle_inhibitor#icon": {
     "format": "{icon}",
+    "timeout": 60,
     "tooltip-format-activated": "Idle Stopped",
     "tooltip-format-deactivated": "Idling...",
     "format-icons": {
-        "activated": "󰈈",
-        "deactivated": "󰈉"
+        "activated": "󰅶",
+        "deactivated": "󰾪"
     }
 },
 "idle_inhibitor#text": {
     "format": "{icon}",
     "tooltip": false,
+    "timeout": 60,
     "format-icons": {
         "activated": " Idle Stopped",
         "deactivated": " Idling..."

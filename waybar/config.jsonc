@@ -11,18 +11,20 @@
   "include": ["~/.config/waybar/modules.jsonc"],
   "modules-left": [
     "hyprland/window",
-    "group/info",
-    "custom/waybar-mpris"
+    "mpris"
   ],
   
   "modules-center": [
-    "hyprland/workspaces"
+    "memory",
+    "cpu",
+    "hyprland/workspaces",
+    "group/time-info"
   ],
 
   "modules-right": [
     //"cava",
-    "group/control-center",
-    "group/hub"
+    "group/hub",
+    "group/control-center"
     // "group/power"
   ],
 }

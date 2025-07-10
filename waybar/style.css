@@ -8,28 +8,27 @@
   border-radius: 0px;
   box-shadow: none;
   text-shadow: none;
-  
+  transition: all 0.3s cubic-bezier(.55,-0.68,.48,1.682);
 }
 
 
 window#waybar {
   background: @background;
-  border-bottom: 1.2px solid @surface_bright;
-
 }
 
 #window {
   padding: 5px 10px;
   margin: 8px 4px;
-  background: @on_secondary;
+  background: transparent;
   border-radius: 14px;
-  color: @secondary;
+  color: @on_background;
 }
 
 tooltip {
-  padding-top: 30px;
-  background: @background;
-  border: 1.5px solid @surface_bright;
+  padding-top: 10px;
+  background: @surface_container;
+  color: @secondary;
+  border: 0px solid @surface_bright;
   border-radius: 14px;
 }
 
@@ -38,20 +37,17 @@ tooltip label {
 }
 
 #custom-arrow-right {
-  color: @secondary;
-  margin: 0px 4px;
+  color: @red;
+  margin: 10px 4px;
 }
 
-#temperature,
 #cpu,
-#memory,
-#disk,
-#custom-updates {
-  padding: 4px 6px;
-  margin: 8px 4px;
-  background: @background;
+#memory{
+  padding: 4px 10px;
+  margin: 7.9px 2px;
+  background: @surface_container;
   color: @primary;
-  border-radius: 14px;
+  border-radius: 12px;
 }
 
 #temperature.critical {
@@ -61,29 +57,39 @@ tooltip label {
 }
 
 #workspaces {
-  margin: 7.8px 4px;
-  background: transparent;
-  border-radius: 16px;
+  margin: 7.9px 2px;
+  background: @surface_container;
+  border-radius: 12px;
+  padding: 0px 2px;
 }
 
 #workspaces button {
   font-size:smaller;
+  border-radius: 16px;
   padding: 0px 4px;
-  margin: 0px 4px;
-  color: alpha(@secondary, 0.5);
+  margin: 3px 1px;
+  background-color: transparent;
+  color: @primary;
   animation: ws_normal 20s ease-in-out 1;
 }
 
+#workspaces button.empty {
+  font-size:smaller;
+  padding: 0px 4px;
+  margin: 3px 1px;
+  background-color: transparent;
+  color: @on_background;
+  animation: ws_normal 20s ease-in-out 1;
+  }
+
 #workspaces button.active {
   color: @primary;
-  border-radius: 40px;
+  border-radius: 9px;
   background: @on_primary;
-  margin-left: 0px;
-  padding-left: 10px;
-  padding-right: 10px;
-  margin-right: 0px;
+  margin: 3px 1px;
+  padding: 0px 4px;
   animation: ws_active 20s ease-in-out 1;
-  transition: all 0.4s cubic-bezier(.55,-0.68,.48,1.682);
+transition: background-color 300ms cubic-bezier(0.55, -0.68, 0.48, 1.682);
 }
 
 #workspaces button.urgent {
@@ -91,15 +97,16 @@ tooltip label {
   color: @background;
   border-radius: 12px;
   padding: 0px 4px;
-  margin: 3px 4px;
+  margin: 3px 1px;
   animation: ws_hover 20s ease-in-out 1;
   transition: all 0.3s cubic-bezier(.55,-0.68,.48,1.682);
 }
 
 
 #workspaces button:hover {
-  color: @on_background;  
+  color: @secondary;
   border-radius: 14px;
+  background: @surface;
   animation: ws_hover 20s ease-in-out 1;
   transition: all 0.3s cubic-bezier(.55,-0.68,.48,1.682);
 }
@@ -107,19 +114,19 @@ tooltip label {
 #workspaces button.active:hover {
   color: @on_primary;  
   background: @on_primary_container;
-  border-radius: 14px;
+  border-radius: 10px;
   animation: ws_hover 20s ease-in-out 1;
   transition: all 0.3s cubic-bezier(.55,-0.68,.48,1.682);
 }
 
 
 #control-center {
-  padding: 4px 6px;
-  margin: 8px 4px;
-  color: @primary;
+  padding: 4px 8px;
+  margin: 7.9px 2px;
+  color: @on_background;
   background: @background;
   border-radius: 14px;
-}
+  }
 
 #bluetooth{
   padding: 0px 2px 0px 5px;
@@ -152,21 +159,22 @@ tooltip label {
   margin: 8px 0px;
 }
 
+#user,
 #gpu,
 #language,
 #idle,
+#custom-updates,
 #custom-gpu-usage,
 #custom-screenrecorder,
 #gamemode,
-#custom-waybar-mpris,
-#custom-weather,
+#mpris,
 #tray,
 #theme-switcher {
   padding: 4px 7px;
-  margin: 8px 4px;
-  color: @tertiary;
+  margin: 8px 2px;
+  color: @secondary;
   background: @background;
-  border-radius: 14px;
+  border-radius: 12px;
 }
 
 #tray menu * {
@@ -188,13 +196,35 @@ tray > .passive {
   background-color: @error;
 }
 
+@keyframes mpris-gradient {
+  0%   { color: @primary; }
+  50%  { color: @tertiary; }
+  100% { color: @error; }
+}
 
-#clock {
-  font-weight: bolder;
+#mpris {
   padding: 4px 10px;
-  margin: 8px 4px;
-  background: @background;
-  border-radius: 13px;
+  margin: 7.9px 2px;
+  border-radius: 10px;
+  transition: color 1s ease-in-out;
+}
+
+#mpris.playing {
+  animation-name: mpris-gradient;
+  animation-duration: 5s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-play-state: running;
+}
+
+
+
+
+#time-info {
+  padding: 4px 10px;
+  margin: 7.9px 2px;
+  background: @surface_container;
+  border-radius: 12px;
   color: @primary;
   
 }
@@ -212,7 +242,7 @@ tray > .passive {
 }
 
 #battery.charging {
-  color: @inverse_surface;
+  color: @tertiary;
 }
 
 #battery.warning {
@@ -221,7 +251,7 @@ tray > .passive {
 
 
 #battery.critical {
-  color: @inverse_surface;
+  color: darker(@error);
   animation: fadeColor 2s forwards;
 }
 
@@ -236,8 +266,12 @@ padding-right: 16px;
   padding-left: 6px;
   margin-left: 4px;
   margin-right: 6px;
-  color: @primary;
-  border: 1px solid @primary;
+  color: @tertiary;
+  background: @on_tertiary;
+}
+
+#custom-weather {
+  padding-left: 4px;
 }
 
 #custom-weather.severe {
@@ -265,7 +299,7 @@ padding-right: 16px;
 }
 
 #custom-weather.default {
-  color: #dbd9d8;
+  color: @primary;
 }
 
 #backlight-slider slider,
@@ -293,7 +327,6 @@ padding-right: 16px;
 }
 
 #privacy:hover{
-  background-color: alpha(@primary, 0.30);
   border-radius: 14px;
   animation: ws_hover 20s ease-in-out 1;
   transition: all 0.3s cubic-bezier(.55,-0.68,.48,1.682);
@@ -303,32 +336,29 @@ padding-right: 16px;
   color: @secondary;
 }
 
-#notifis:hover,
-#audio:hover,
-#light:hover,
-#connection:hover,
-#batterys:hover {
-  padding-left: 0px;
-  padding-right: 5px;
-  margin: 0px 0px;
-  background-color: @on_primary;
-  border-radius: 10px;
-  color: @primary;
 
+#control-center:hover {
+  padding: 0px 15px;
+  border-radius: 10px;
+  margin: 7.9px 2px;
+  background-color: @surface_container;
+  border-radius: 10px;
   animation: ws_hover 20s ease-in-out 1;
   transition: all 0.3s cubic-bezier(.55,-0.68,.48,1.682);
 }
 
 #cava:hover,
-#clock:hover{
-  background-color: @primary;
-  color: @on_primary;
+#time-info:hover{
+  padding: 0px 15px;
   border-radius: 10px;
+  background-color: @surface_container_high;
+  color: @secondary;
   animation: ws_hover 20s ease-in-out 1;
   transition: all 0.3s cubic-bezier(.55,-0.68,.48,1.682);
 }
 
 
+#user:hover,
 #gpu:hover,
 #language:hover,
 #idle:hover,
@@ -341,13 +371,12 @@ padding-right: 16px;
 #custom-updates:hover,
 #theme-switcher:hover,
 #gamemode:hover,
-#custom-weather:hover,
-#tray:hover,
 #window:hover,
-#custom-waybar-mpris:hover{
-  background-color: @on_tertiary;
-  color: @tertiary;
-  border-radius: 14px;
+#mpris:hover{
+  padding: 0px 15px;
+  border-radius:10px;
+  background-color: @surface_container_high;
+  color: @secondary;
   animation: ws_hover 20s ease-in-out 1;
   transition: all 0.3s cubic-bezier(.55,-0.68,.48,1.682);
 }

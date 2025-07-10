@@ -4,13 +4,13 @@
   "positionY": "top",
   "cssPriority": "user",
   "control-center-width": 400,
-  "control-center-height": 960, 
+  "control-center-height": 1030, 
   "control-center-margin-top": 2,
   "control-center-margin-bottom": 2,
   "control-center-margin-right": 1,
   "control-center-margin-left": 0,
-  "notification-window-width": 400,
-  "notification-icon-size": 38,
+  "notification-window-width": 350,
+  "notification-icon-size": 36,
   "notification-body-image-height": 160,
   "notification-body-image-width": 200,
 
@@ -50,7 +50,7 @@
     "title": {
       "text": "Notifications",
       "clear-all-button": true,
-      "button-text": " 󰎟 "
+      "button-text": "󰎟"
     },
     "dnd": {
       "text": "Do not disturb"
@@ -73,32 +73,33 @@
     },
     "buttons-grid": {
       "actions": [
-        {
-          "label": "󰖁",
-          "command": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
-          "type": "toggle"
-        },
-        {
-          "label": "󰍭",
-          "command": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
-	  "type": "toggle"
-        },
-        {
-          "label": "󰤨",
-          "command": "nm-connection-editor"
-        },
-        {
-          "label": "󰂯",
-          "command": "blueman-manager"
-        },
-        {
-          "label": "󰒓",
-          "command": "better-control"
-        },
-	{
-	  "label": "󰌾",
-	  "command": "hyprlock"
-	}
+              {
+        "label": "󰤥",
+        "type": "toggle",
+        "active": false,
+        "command": "sh -c '[[ $SWAYNC_TOGGLE_STATE == true ]] && nmcli radio wifi on || nmcli radio wifi off'",
+        "update-command": "sh -c '[[ $(nmcli radio wifi) == \"enabled\" ]] && echo true || echo false'"
+      },
+ {
+  "label": "󰖀",
+  "type": "toggle",
+  "active": true,
+  "command": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+  "update-command": "sh -c 'wpctl get-volume @DEFAULT_AUDIO_SINK@ | grep -q MUTED && echo false || echo true'"
+},
+{
+  "label": "󱩌",
+  "type": "toggle",
+  "active": false,
+  "command": "sh -c 'pgrep hyprsunset >/dev/null && killall hyprsunset || /usr/bin/hyprsunset -t 3800 -g 80'",
+  "update-command": "sh -c 'pgrep hyprsunset >/dev/null && echo true || echo false'"
+},
+{
+  "label": "󰺵",
+  "type": "toggle",
+  "active": false,
+  "command": "~/.config/hypr/scripts/gamemode"
+}
       ]
     }
   }

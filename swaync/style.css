@@ -18,7 +18,7 @@
 
   all: unset;
   font-size: 14px;
-  font-family: "Iosevka";
+  font-family: MaterialDesignIcons, Iosevka;
   transition: 200ms;
 
 }
@@ -34,21 +34,17 @@
 
 .floating-notifications.background .notification-row .notification-background {
   background: @background;
-  border: 1.2px solid @surface_bright;
-  border-radius: 26px;  
-  margin: 16px;
+  border: 1px solid @surface_bright;
+  border-radius: 25px;  
+  margin: 10px;
   padding: 0;
   animation: ws_active 20s ease-in-out 1;
-  transition: all 0.4s cubic-bezier(.55,-0.68,.48,1.682);
-  -webkit-box-shadow: 0px 0px 27px -10px @shadow;
--moz-box-shadow: 0px 0px 27px -10px @shadow;
-box-shadow: 0px 0px 8px -10px @shadow;
+  box-shadow: 0 2px 4.5px 0 @shadow;   
 }
 
 .floating-notifications.background .notification-row .notification-background .notification {
-  padding: 10px;
+  padding: 5px;
 border-radius: 26px;
-box-shadow: 0 2px 8px 0 @shadow;   
 }
 
 .floating-notifications.background .notification-row .notification-background .notification.critical {
@@ -64,22 +60,21 @@ box-shadow: 0 2px 8px 0 @shadow;
 }
 
 .floating-notifications.background .notification-row .notification-background .notification > *:last-child > * .notification-action {
-  border-radius: 8px;
-  background-color: @shadow ;
-  color: @primary;
+  border-radius: 20px;
+  background-color: @surface_container ;
+  color: @secondary;
   margin: 6px;
-  border: 1px solid transparent;
 }
 
 .floating-notifications.background .notification-row .notification-background .notification > *:last-child > * .notification-action:hover {
-  color: @background;
-  background-color: @tertiary;
-  border: 1px solid @tertiary;
+  color: @primary;
+  background-color: @on_primary;
+  border-radius: 15px;
 }
 
 .floating-notifications.background .notification-row .notification-background .notification > *:last-child > * .notification-action:active {
-  background-color: @secondary;
-  color: @tertiary;
+  background-color: @on_secondary;
+  color: @secondary;
 }
 
 .image {
@@ -139,7 +134,7 @@ box-shadow: 0 2px 8px 0 @shadow;
 .control-center {
   color: @text;
   background: @background;
-  border-radius: 12px;  
+  border-radius: 24px;  
   border: 1.5px solid @surface_container;
   box-shadow: 0 2px 8px 0 @shadow;   
   margin: 18px;
@@ -150,10 +145,10 @@ box-shadow: 0 2px 8px 0 @shadow;
 /* Notifications  */
 .control-center .notification-row .notification-background,
 .control-center .notification-row .notification-background .notification.critical {
-  background: @background;
+  background: @surface_container;
   color: alpha(@text, .8);
-  border: 1px solid alpha(@selected, .5);
-  border-radius: 10px;
+  border: 1px solid @surface_bright;
+  border-radius: 24px;
   margin: 4px 0px;
   padding: 4px;
 }
@@ -172,11 +167,10 @@ box-shadow: 0 2px 8px 0 @shadow;
 }
 
 .control-center .notification-row .notification-background .notification > *:last-child > * .notification-action {
-  background: alpha(@background, .85);
-  color: @text;
-  border-radius: 8px;
+  border-radius: 20px;
+  background-color: @surface_container_high;
+  color: @secondary;
   margin: 6px;
-  border: 2px solid transparent;
 }
 
 .control-center .notification-row .notification-background .notification > *:last-child > * .notification-action:hover {
@@ -254,19 +248,22 @@ color: transparent;
   /* Notification clear button */
 .widget-title {
   font-size: 1.2em;
-  margin: 2px;
+  margin: 10px;
 }
 
 .widget-title button {
   border-radius: 24px;
-  padding: 4px 16px;
-  border: 1.5px solid @tertiary;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  color: @tertiary;
+  background: @on_tertiary;
 }
 
 .widget-title button:hover {
-  background-color: @secondary_container;
-  border: 1.5px solid @color12;
-  color: @secondary;
+  background-color: @primary_container;
+  color: @primary;
 }
 
 .widget-title button:active {
@@ -307,33 +304,53 @@ color: transparent;
 
   /* Buttons menu */
 .widget-buttons-grid {
-  padding: 10px 2px;
-  margin: 20px;
-  border-radius: 24px;  
-  background: alpha(@background, .80);
+  padding: 10px 10px;
+  margin-top: 0px;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  margin-left: 10px;
+  border-radius: 26px;  
+  background: @surface_container;
 }
 
+
+
 .widget-buttons-grid>flowbox>flowboxchild>button {
-  margin: 8px;
-  padding-left: 32px;
-  padding-right: 32px;
-  padding-top: 14px;
-  padding-bottom: 14px;
-  background: @primary;
-  color: alpha(@background, .8);
-  border-radius: 24px;
+  margin: 12px 12px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  background: transparent;
+  color: @on_backgroundw;
+  border-radius: 17px;
   border: 2px solid transparent;
 }
 
 .widget-buttons-grid>flowbox>flowboxchild>button:hover {
   background: @on_primary;
   color: @primary;
+  border-radius: 35%;
+}
+
+.widget-buttons-grid>flowbox>flowboxchild>button.toggle:checked {
+  background: @on_tertiary;
+  color: @tertiary;
+  border-radius: 24px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.widget-buttons-grid>flowbox>flowboxchild>button.toggle:checked:hover {
+  background: @on_primary;
+  color: @primary;
+  border-radius: 35%;
 }
 
   /* Music player */
 .widget-mpris {
     background: none;
-    border-radius: 16px;
+    border-radius: 19px;
     color: @text;
     padding: 0px;
     margin:  5px 6px;
@@ -341,7 +358,7 @@ color: transparent;
  
 .widget-mpris button {
   color: alpha(@text, .6);
-  border-radius: 6px;
+  border-radius: 19px;
 }
 
 .widget-mpris button:hover {
@@ -350,14 +367,17 @@ color: transparent;
 
   /* NOTE: Background need *opacity 1* otherwise will turn into the album art blurred  */
 .widget-mpris-player {
-    background: alpha(@background, .7);
+    background: @surface_container;
     padding: 12px 10px;
-    margin: 10px;
-    border-radius: 14px;
+    margin-top: 10px;
+    margin-left: 8px;
+    margin-right: 8px;
+    margin-bottom: 0px;
+    border-radius: 19px;
 }
 
 .widget-mpris-album-art {
-  border-radius: 16px;
+  border-radius: 19px;
 }
  
 .widget-mpris-title {
@@ -373,51 +393,55 @@ color: transparent;
 /* Volume widget */
 trough {
   border-radius: 20px;
-  background: alpha(@primary, .3);
-  border: 1px solid @background;
+  background: @background;
 }
 
 trough highlight {
   /* ´trough´ is the background of the slider, ´highlight´ is the actual slider */
-  padding: 2px;
+  padding: 3px;
   background: @primary;
-  border: 1px solid @primary;
   border-radius: 20px;
 }
 
 trough slider {
   
-  padding: 2px;
+  padding: 3px;
   background: @primary;
-  border: 1px solid @primary;
   border-radius: 20px;
 
 }
+
 trough highlight:hover {
-  padding: 2px;
-  background: @tertiary;
+  padding: 3px;
+  background: @on_primary;
   border-radius: 20px;
 
 }
 
 .widget-volume {
-  padding: 20px 10px;
-  background-color: alpha(@background, 0.0);
+  padding: 20px 17px;
+  background-color: @surface_container;
   border-radius: 20px 20px 0px 0px;
   font-size: 45px;
-  margin-left: 10px;
-  margin-right: 10px;
+  margin-top: 14px;
+  margin-left: 8px;
+  margin-right: 8px;
   border: 0px solid transparent;
 }
 
 
 .widget-backlight {
-  padding: 20px 10px;
-  background-color: alpha(@background, 0.0);
+  padding: 20px 17px;
+  background-color: @surface_container;
   font-size: 15px;
   margin-top: -8px;
-  margin-left: 10px;
-  margin-right: 10px;
+  margin-left: 8px;
+  margin-right: 8px;
+  margin-bottom: 15px;
   border-radius: 0px 0px 20px 20px;
   border: 0px solid transparent;
+}
+
+.widget-backlight:hover {
+  background-color: red;
 }
