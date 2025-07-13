@@ -35,7 +35,7 @@
 .floating-notifications.background .notification-row .notification-background {
   background: @background;
   border: 1px solid @surface_bright;
-  border-radius: 25px;  
+  border-radius: 18px;  
   margin: 10px;
   padding: 0;
   animation: ws_active 20s ease-in-out 1;
@@ -108,15 +108,18 @@ border-radius: 26px;
 }
 
 .notification.critical progress {
+  color: @primary;
+  border: none;
+}
+
+
+ progress {
   background-color: @primary;
   border: none;
 }
 
-.notification.low progress,
-.notification.normal progress {
-  background: alpha(@primary, .85);
-  border: none;
-}
+
+
 
 .notification.low trough{
   border: none;
@@ -147,14 +150,15 @@ border-radius: 26px;
 .control-center .notification-row .notification-background .notification.critical {
   background: @surface_container;
   color: alpha(@text, .8);
-  border: 1px solid @surface_bright;
-  border-radius: 24px;
+  border: 0px solid @surface_bright;
+  border-radius: 15px;
   margin: 4px 0px;
   padding: 4px;
 }
 
 .control-center .notification-row .notification-background .notification.critical {
   color: @primary;
+  background: red;
 }
 
 .control-center .notification-row .notification-background .notification .notification-content {
@@ -203,8 +207,9 @@ border-radius: 26px;
   color: @background;
 }
 
-progressbar,
-progress,
+
+.progressbar,
+.progress,
 trough {
 border-radius: 12px;
 color: transparent;
@@ -304,28 +309,42 @@ color: transparent;
 
   /* Buttons menu */
 .widget-buttons-grid {
-  padding: 10px 10px;
+  padding: 0px 0px;
   margin-top: 0px;
-  margin-bottom: 10px;
-  margin-right: 10px;
-  margin-left: 10px;
+  margin-bottom: 0px;
+  margin-right: 20px;
+  margin-left: 30px;
   border-radius: 26px;  
-  background: @surface_container;
+  background: transparent;
 }
 
 
+.widget-buttons-grid {
+  background-color: @surface_container_low;
+  padding: 4px 2px;
+  margin: 5px 35px;
+}
+
+.widget-buttons-grid:hover {
+  border-radius: 22px;
+  padding: 4px 10px;
+  margin: 5px 25px;
+}
+
 
 .widget-buttons-grid>flowbox>flowboxchild>button {
-  margin: 12px 12px;
-  padding-left: 15px;
-  padding-right: 15px;
-  padding-top: 16px;
-  padding-bottom: 16px;
+  margin: 2px 1px;
+  padding: 12px 10px;
   background: transparent;
   color: @on_backgroundw;
   border-radius: 17px;
   border: 2px solid transparent;
 }
+
+.widget-buttons-grid > flowbox > flowboxchild > button.toggle:not(:checked) {
+  margin: 0px 2.5px;
+}
+
 
 .widget-buttons-grid>flowbox>flowboxchild>button:hover {
   background: @on_primary;
@@ -336,15 +355,13 @@ color: transparent;
 .widget-buttons-grid>flowbox>flowboxchild>button.toggle:checked {
   background: @on_tertiary;
   color: @tertiary;
+  margin: 0px 2.5px;
   border-radius: 24px;
-  padding-left: 15px;
-  padding-right: 15px;
 }
 
 .widget-buttons-grid>flowbox>flowboxchild>button.toggle:checked:hover {
   background: @on_primary;
   color: @primary;
-  border-radius: 35%;
 }
 
   /* Music player */
@@ -406,7 +423,7 @@ trough highlight {
 trough slider {
   
   padding: 3px;
-  background: @primary;
+  background: transparent;
   border-radius: 20px;
 
 }
@@ -421,11 +438,11 @@ trough highlight:hover {
 .widget-volume {
   padding: 20px 17px;
   background-color: @surface_container;
-  border-radius: 20px 20px 0px 0px;
+  border-radius: 15px 15px 0px 0px;
   font-size: 45px;
   margin-top: 14px;
-  margin-left: 8px;
-  margin-right: 8px;
+  margin-left: 2px;
+  margin-right: 2px;
   border: 0px solid transparent;
 }
 
@@ -435,13 +452,14 @@ trough highlight:hover {
   background-color: @surface_container;
   font-size: 15px;
   margin-top: -8px;
-  margin-left: 8px;
-  margin-right: 8px;
+  margin-left: 2px;
+  margin-right: 2px;
   margin-bottom: 15px;
-  border-radius: 0px 0px 20px 20px;
+  border-radius: 0px 0px 15px 15px;
   border: 0px solid transparent;
 }
 
+.widget-volume:hover,
 .widget-backlight:hover {
-  background-color: red;
+  background-color: @surface_container_low;
 }

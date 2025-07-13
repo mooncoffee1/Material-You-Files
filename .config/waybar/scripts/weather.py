@@ -33,19 +33,19 @@ feels_like_text = f"Feels like {feels_like}°{'C' if unit == 'metric' else 'F'}"
 
 temp_max = html("div[data-testid='wxData'] span[data-testid='TemperatureValue']").eq(0).text()
 temp_min = html("div[data-testid='wxData'] span[data-testid='TemperatureValue']").eq(1).text()
-minmax_text = f"  {temp_min}    {temp_max}"
+minmax_text = f"󰸄  {temp_min}  󰸅  {temp_max}"
 
 wind = html("span[data-testid='Wind']").text()
-wind_text = f"  {wind}"
+wind_text = f"󱭚  {wind}"
 
 humidity = html("span[data-testid='PercentageValue']").text()
-humidity_text = f"  {humidity}"
+humidity_text = f"󰖎  {humidity}"
 
 visibility = html("span[data-testid='VisibilityValue']").text()
-visibility_text = f"  {visibility}"
+visibility_text = f"󰈈  {visibility}"
 
 aqi = html("text[data-testid='DonutChartValue']").text()
-aqi_text = f"  AQI {aqi}" if aqi else ""
+aqi_text = f"󰵃  AQI {aqi}" if aqi else ""
 
 # Fetch only first rain percentage (not all)
 rain_raw = html("div[data-testid='SegmentPrecipPercentage'] > span")
@@ -53,7 +53,7 @@ rain_text = ""
 if rain_raw and len(rain_raw) > 0:
     rain_val = rain_raw.eq(0).text()
     if rain_val:
-        rain_text = f"  {rain_val}"
+        rain_text = f"󰖖  {rain_val}"
 
 tooltip = (
     f"<span size='xx-large'>{temp}</span>\n"

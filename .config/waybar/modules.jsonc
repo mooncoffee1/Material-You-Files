@@ -143,9 +143,9 @@
     // "tooltip-format": "{volume}% {icon} | {desc}",
     "format-muted": "󰖁",
     "format-icons": {
-      "headphones": "󰋌",
+      "headphones": "󱡏",
       "handsfree": "󰋌",
-      "headset": "󰋌",
+      "headset": "󰋋",
       "phone": "",
       "portable": "",
       "car": " ",
@@ -223,7 +223,7 @@
     "format-on": "󰂯",
     "format-off": "󰂲",
     "format-disabled": "",
-    "format-connected": "",
+    "format-connected": "󰂯",
     "tooltip": false,
     "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
     "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
@@ -232,11 +232,12 @@
     "on-click": "swaync-client -t -sw",
   },
   "bluetooth#status": {
+    "tooltip": false,
     "format-on": "",
     "format-off": "",
     "format-disabled": "",
-    "format-connected": "<b>{num_connections}</b>",
-    "format-connected-battery": "<small><b>{device_battery_percentage}%</b></small>",
+    "format-connected": "{device_alias} | 󰁹 {num_connections}",
+    "format-connected-battery": "{device_alias} 󰁹 {device_battery_percentage}",
     "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
     "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
     "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
@@ -252,7 +253,7 @@
     "drawer": {
       "transition-duration": 600,
       "transition-left-to-right": true,
-      "click-to-reveal": true,
+      "click-to-reveal": false,
     },
     "modules": ["custom/arrow-left", "group/idle", "custom/updates", "gamemode", "tray"],
   },
@@ -448,14 +449,14 @@
 
   "battery": {
     "on-click": "swaync-client -t -sw",
-        "tooltip": false,
+    "tooltip": false,
     "states": {
       "good": 60,
       "warning": 30,
       "critical": 15
     },
     "format": "{icon}",
-    "interval": 2,
+    "interval": 1,
     "format-charging": "󱐋",
     "format-full": "<span color='#82A55F'><b>{icon}</b></span>",
     "format-icons": [
