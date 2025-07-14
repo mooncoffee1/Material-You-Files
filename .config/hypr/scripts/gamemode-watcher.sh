@@ -8,7 +8,6 @@ echo $$ > "$PIDFILE"
 while [ -f "$FLAG" ]; do
     # Check current mode settings
     animations_state=$(hyprctl getoption animations:enabled | head -n1 | awk '{print $2}')
-    blur_state=$(hyprctl getoption decoration:blur:enabled | head -n1 | awk '{print $2}')
     drop_shadow_state=$(hyprctl getoption decoration:drop_shadow | head -n1 | awk '{print $2}')
 
     # Gaming mode requires animations=0, blur=0, drop_shadow=0
@@ -16,7 +15,6 @@ while [ -f "$FLAG" ]; do
         # Reapply gaming mode settings
         hyprctl --batch "\
             keyword animations:enabled 0;\
-            keyword decoration:drop_shadow 0;\
             keyword decoration:blur:enabled 0;\
             keyword general:gaps_in 0;\
             keyword general:gaps_out 0;\

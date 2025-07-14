@@ -103,17 +103,19 @@
 {
   "label": "󰖔",
   "type": "toggle",
-  "active": false,
-  "command": "sh -c 'pgrep hyprsunset >/dev/null && killall hyprsunset || /usr/bin/hyprsunset -t 3800 -g 80'",
-  "updat,e-command": "sh -c 'pgrep hyprsunset >/dev/null && echo true || echo false'"
-},
+  "active": true,
+  "command": "sh -c '$HOME/.config/hypr/scripts/hyprsunset-toggle.sh'",
+"update-command": "sh -c '[ -f \"$HOME/.cache/hyprsunset_active\" ] && echo true || echo false'"
+}, 
 {
   "label": "󰸶",
   "type": "toggle",
   "active": false,
   "command": "sh -c '$HOME/.config/hypr/scripts/gamemode'",
-  "update-command": "sh -c '[ -f \"$HOME/.cache/hypr_gamemode_active\" ] && echo true || echo false'"
+"update-command": "sh -c '$HOME/.config/hypr/scripts/gamemode -m'"
+
 },
+
 {
   "label": "󰛊",
   "type": "toggle",

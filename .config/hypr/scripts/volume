@@ -1,4 +1,4 @@
-#!/bin/bash
+##!/bin/bash
 
 # ░█▀▀▄░█▀▀░▄▀▀▄░█▀▄▀█░░▀░░█░▄░█▀▀▄░█▀▀█░█▀▀▄░░   volume changer!
 # ░█░▒█░█▀▀░█░░█░█░▀░█░░█▀░█▀▄░█▄▄▀░█▄▀█░█░▒█░░   v0.9 TODO: consolidate notifications,
@@ -52,9 +52,9 @@ get_urgency() {
 }
 
 # Notify
-notify_user() {
-  notify-send  -e -h string:x-canonical-private-synchronous:sys-notify -u "$(get_urgency)" -i "$(get_icon)" -t 555 -h  int:value:"$(get_volume)" "Volume : $(get_volume) "
-}
+#notify_user() {
+#  notify-send  -e -h string:x-canonical-private-synchronous:sys-notify -u "$(get_urgency)" -i "$(get_icon)" -t 555 -h  int:value:"$(get_volume)" "Volume : $(get_volume) "
+#}
 
 # Increase Volume
 inc_volume() {

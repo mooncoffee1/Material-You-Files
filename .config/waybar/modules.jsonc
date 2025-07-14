@@ -255,7 +255,7 @@
       "transition-left-to-right": true,
       "click-to-reveal": false,
     },
-    "modules": ["custom/arrow-left", "group/idle", "custom/updates", "gamemode", "tray"],
+    "modules": ["custom/arrow-left", "custom/updates", "gamemode", "tray"],
   },
   "custom/arrow-left": {
     "format": "󰁎",

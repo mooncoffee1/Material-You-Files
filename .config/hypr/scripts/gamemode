@@ -1,9 +1,14 @@
 #!/usr/bin/env sh
 
 FLAG="$HOME/.cache/hypr_gamemode_active"
-WATCHER="$HOME/.config/hypr/scripts/gamemode-watcher.sh"
-PIDFILE="/tmp/hypr_gamemode_watcher.pid"
 
+# Handle -m flag to print current mode as true/false
+if [ "$1" = "-m" ]; then
+    [ -f "$FLAG" ] && echo true || echo false
+    exit 0
+fi
+
+# Toggle mode
 if [ -f "$FLAG" ]; then
     # Currently gaming mode → switch to normal mode
     hyprctl --batch "\
@@ -13,14 +18,7 @@ if [ -f "$FLAG" ]; then
         keyword general:border_size 1;\
         keyword decoration:rounding 18"
     rm -f "$FLAG"
-
-    # Stop watcher if running
-    if [ -f "$PIDFILE" ]; then
-        kill "$(cat "$PIDFILE")" 2>/dev/null
-        rm -f "$PIDFILE"
-    fi
-
-    echo "Switched to NORMAL mode, watcher stopped."
+    echo "Switched to NORMAL mode."
 else
     # Currently normal mode → switch to gaming mode
     hyprctl --batch "\
@@ -32,11 +30,5 @@ else
         keyword general:border_size 1;\
         keyword decoration:rounding 0"
     touch "$FLAG"
-
-    # Start watcher if not running
-    if [ ! -f "$PIDFILE" ] || ! kill -0 "$(cat "$PIDFILE")" 2>/dev/null; then
-        nohup sh "$WATCHER" >/dev/null 2>&1 &
-    fi
-
-    echo "Switched to GAMING mode, watcher started."
+    echo "Switched to GAMING mode."
 fi
