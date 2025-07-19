@@ -1,9 +1,0 @@
-# Store the command in a variable
-command="rofi -show drun -theme ~/.config/rofi/material-theme.rasi"
-
-# Check if the process is running
-if ! pidof "$(echo "$command" | cut -d' ' -f1)" >/dev/null; then
-    # If not running, execute the command
-    eval "$command"
-fi
-

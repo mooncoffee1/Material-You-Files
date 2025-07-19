@@ -1,130 +1,26 @@
-@import "colors.css";
-
-
 * {
-  background-image: none;
-  
-
+	all: unset;
+	background-image: none;
+	transition: 400ms cubic-bezier(0.05, 0.7, 0.1, 1);
 }
+
 window {
-  background: @surface;
+	background: rgba(0, 0, 0, 0.5);
 }
+
 button {
-  color: @on_background;
-  background: @surface_container;
-  outline-style: none;
-  border-width: 2px;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 10%;
-  border-radius: 0px;
-  box-shadow: none;
-  text-shadow: none;
-  
+	font-family: 'Material Symbols Outlined';
+	font-size: 10rem;
+	background-color: rgba(11, 11, 11, 0.4);
+	color: #FFFFFF;
+	margin: 2rem;
+	border-radius: 2rem;
+	padding: 3rem;
 }
 
-
-button:focus {
-  background-size: 20%;
-  -webkit-transform: translate(0px, 5px);
-}
-
-button:hover  {
-  background-size: 25%;
-  border-radius: 30px;
-  -webkit-transform: translate(0px, 50px);
-  background-color: @on_primary;
-  color: @primary;
-  animation: gradient_f 20s ease-in infinite;
-  transition: all 0.3s cubic-bezier(.55,0.0,.28,1.682);
-  }
-
-  button:hover#logout {
-    border-radius: 50px 50px 0px 50px;
-    margin: 20px 0px 0px 280px;
-        border: transparent;
-    background-image: image(
-      url("./icons/logout.png"),
-      url("/usr/share/wlogout/icons/logout.png"),
-      url("/usr/local/share/wlogout/icons/logout.png")
-    );
-  }
-  
-  
-  button:hover#hibernate {
-    border-radius: 50px 50px 50px 0px;
-    border: transparent;
-    margin: 20px 280px 0px 0px;
-    background-image: image(
-      url("./icons/hibernate.png"),
-      url("/usr/share/wlogout/icons/hibernate.png"),
-      url("/usr/local/share/wlogout/icons/hibernate.png")
-    );
-  }
-  
-  button:hover#shutdown {
-    border-radius: 50px 0px 50px 50px;
-    margin: 0px 0px 20px 280px;
-        border: transparent;
-    background-image: image(
-      url("./icons/power.png"),
-      url("/usr/share/wlogout/icons/shutdown.png"),
-      url("/usr/local/share/wlogout/icons/shutdown.png")
-    );
-  }
-  
-  button:hover#reboot {
-    border-radius: 0px 50px 50px 50px;
-    margin: 0px 280px 20px 0px;
-        border: transparent;
-    background-image: image(
-      url("./icons/reboot.png"),
-      url("/usr/share/wlogout/icons/reboot.png"),
-      url("/usr/local/share/wlogout/icons/reboot.png")
-    );
-  }
-
-
-
-
-#logout {
-  border-radius: 66px 0px 0px 0px;
-  margin: 80px 0px 0px 350px;
-  background-image: image(
-    url("./icons/logout.png"),
-    url("/usr/share/wlogout/icons/logout.png"),
-    url("/usr/local/share/wlogout/icons/logout.png")
-  );
-}
-
-
-#hibernate {
-  border-radius: 0px 66px 0px 0px;
-  margin: 80px 350px 0px 0px;
-  background-image: image(
-    url("./icons/hibernate.png"),
-    url("/usr/share/wlogout/icons/hibernate.png"),
-    url("/usr/local/share/wlogout/icons/hibernate.png")
-  );
-}
-
-#shutdown {
-  border-radius: 0px 0px 0px 66px;
-  margin: 0px 0px 80px 350px;
-  background-image: image(
-    url("./icons/power.png"),
-    url("/usr/share/wlogout/icons/shutdown.png"),
-    url("/usr/local/share/wlogout/icons/shutdown.png")
-  );
-}
-
-#reboot {
-  border-radius: 0px 0px 66px 0px;
-  margin: 0px 350px 80px 0px;
- 
-  background-image: image(
-    url("./icons/reboot.png"),
-    url("/usr/share/wlogout/icons/reboot.png"),
-    url("/usr/local/share/wlogout/icons/reboot.png")
-  );
+button:focus,
+button:active,
+button:hover {
+	background-color: rgba(51, 51, 51, 0.5);
+	border-radius: 4rem;
 }
