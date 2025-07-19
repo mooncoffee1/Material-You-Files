@@ -79,8 +79,22 @@
   "group/control-center": {
     "orientation": "inherit",
     "on-click": "swaync-client -t -sw",
-    "modules": [ "privacy","group/audio", "group/connection", "group/batterys"],
+    "modules": [ "privacy", "custom/gamemode", "custom/caffeinated","group/audio", "group/connection", "group/batterys"],
   },
+  "custom/gamemode": {
+  "exec": "~/.config/waybar/scripts/gamemode_status.sh",
+  	"icon-size": 11,
+  "interval": 1,
+  "return-type": "json",
+  "on-click": "~/.config/hypr/scripts/gamemode",  // optional toggle on click
+  "tooltip": false
+},
+"custom/caffeinated": {
+  "exec": "~/.config/hypr/scripts/caffeinated-status.sh",
+  "interval": 1,
+  "return-type": "json"
+},
+
   "privacy": {
 	"icon-spacing": 14,
 	"icon-size": 11,
@@ -501,7 +515,7 @@
   }
 },
 "mpris": {
-	"format": "{player_icon} {title}",
+	"format": "{player_icon} {title} - {artist}",
 	"format-paused": "{status_icon} <i>{title}</i>",
   "max-length": 35,
 	"player-icons": {

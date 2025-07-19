@@ -162,6 +162,7 @@ transition: background-color 300ms cubic-bezier(0.55, -0.68, 0.48, 1.682);
   margin: 8px 0px;
 }
 
+
 #user,
 #gpu,
 #language,
@@ -234,6 +235,8 @@ tray > .passive {
   margin: 4px;
 }
 
+#custom-caffeinated,
+#custom-gamemode,
 #privacy,
 #backlight,
 #battery {

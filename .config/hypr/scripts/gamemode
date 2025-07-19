@@ -17,6 +17,9 @@ if [ -f "$FLAG" ]; then
         keyword general:gaps_out 6;\
         keyword general:border_size 1;\
         keyword decoration:rounding 18"
+    
+    powerprofilesctl set balanced
+
     rm -f "$FLAG"
     echo "Switched to NORMAL mode."
 else
@@ -29,6 +32,9 @@ else
         keyword general:gaps_out 0;\
         keyword general:border_size 1;\
         keyword decoration:rounding 0"
+    
+    powerprofilesctl set power-saver
+
     touch "$FLAG"
     echo "Switched to GAMING mode."
 fi

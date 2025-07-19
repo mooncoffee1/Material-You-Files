@@ -269,12 +269,13 @@ color: transparent;
 }
 
 .widget-title button:hover {
-  background-color: @primary_container;
+  background-color: @on_primary;
   color: @primary;
+  padding: 5px 20px;
 }
 
 .widget-title button:active {
-  background-color: alpha(@selected, .2);
+  background-color: red;
   color: @selected;
 }
 
