@@ -1,0 +1,98 @@
+#!/usr/bin/env python3
+
+import sys
+import re
+import subprocess
+import os
+
+# Patch numpy.asscalar to fix removed attribute issue
+import numpy
+if not hasattr(numpy, "asscalar"):
+    numpy.asscalar = lambda x: x.item()
+
+# Now import colormath modules safely
+from colormath.color_objects import sRGBColor, LabColor
+from colormath.color_conversions import convert_color
+from colormath.color_diff import delta_e_cie2000
+
+CSS_FILE = os.path.expanduser("~/.config/waybar/colors.css")
+
+def read_primary_color(css_path):
+    try:
+        with open(css_path) as f:
+            for line in f:
+                if '@define-color primary' in line:
+                    m = re.search(r'@define-color primary\s+([#0-9a-fA-F]+);', line)
+                    if m:
+                        return m.group(1)
+    except FileNotFoundError:
+        print(f"CSS file not found: {css_path}", file=sys.stderr)
+    return None
+
+def hex_to_rgb(hexstr):
+    hexstr = hexstr.lstrip('#')
+    return tuple(int(hexstr[i:i+2], 16) for i in (0, 2, 4))
+
+def find_closest_color(primary_hex):
+    primary_rgb = hex_to_rgb(primary_hex)
+    primary_lab = convert_color(sRGBColor(*primary_rgb, is_upscaled=True), LabColor)
+
+    colors = {
+        "adwaita": (97, 104, 103),
+        "black": (0, 0, 0),
+        "blue": (0, 0, 255),
+        "bluegrey": (96, 125, 139),
+        "breeze": (53, 152, 219),
+        "brown": (165, 42, 42),
+        "carmine": (150, 0, 24),
+        "cyan": (0, 255, 255),
+        "darkcyan": (0, 139, 139),
+        "deeporange": (255, 87, 34),
+        "green": (0, 128, 0),
+        "grey": (128, 128, 128),
+        "indigo": (75, 0, 130),
+        "magenta": (255, 0, 255),
+        "nordic": (94, 129, 172),
+        "orange": (255, 165, 0),
+        "palebrown": (181, 101, 29),
+        "paleorange": (255, 169, 79),
+        "pink": (255, 192, 203),
+        "red": (255, 0, 0),
+        "teal": (0, 128, 128),
+        "violet": (238, 130, 238),
+        "white": (255, 255, 255),
+        "yaru": (114, 63, 45),
+        "yellow": (255, 255, 0),
+    }
+
+    min_dist = None
+    closest_color = None
+    for name, rgb in colors.items():
+        lab = convert_color(sRGBColor(*rgb, is_upscaled=True), LabColor)
+        dist = delta_e_cie2000(primary_lab, lab)
+        if min_dist is None or dist < min_dist:
+            min_dist = dist
+            closest_color = name
+
+    return closest_color
+
+def main():
+    primary_hex = read_primary_color(CSS_FILE)
+    if not primary_hex:
+        print(f"Primary color not found in {CSS_FILE}", file=sys.stderr)
+        sys.exit(1)
+
+    closest = find_closest_color(primary_hex)
+    if not closest:
+        print("No suitable Papirus color found.", file=sys.stderr)
+        sys.exit(1)
+
+    print(f"Closest Papirus color: {closest}")
+    try:
+        subprocess.run(["papirus-folders", "-C", closest, "--theme", "Papirus-Dark"], check=True)
+    except Exception as e:
+        print(f"Failed to run papirus-folders: {e}", file=sys.stderr)
+        sys.exit(1)
+
+if __name__ == "__main__":
+    main()

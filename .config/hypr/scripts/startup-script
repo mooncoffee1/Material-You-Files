@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# Start background services and apps
+#nm-applet &
+dunst &
+# poweralertd &
+# wayland-pipewire-idle-inhibit &
+swaync &
+systemctl --user start hyprpolkitagent.service
+hypridle &
+# blueman-applet &
+# rog-control-center &
+waybar &
+bluetoothctl power off &

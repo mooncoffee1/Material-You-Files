@@ -18,12 +18,14 @@
     "memory",
     "temperature",
     "hyprland/workspaces",
-    "group/time-info"
+    "group/time-info",
+    "custom/gamemode",
+    "idle_inhibitor",
+    "custom/updates",
+    "power-profiles-daemon"
   ],
 
   "modules-right": [
-    //"cava",
-    "group/hub",
     "group/control-center"
     // "group/power"
   ],

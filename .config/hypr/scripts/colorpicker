@@ -1,0 +1,48 @@
+#!/bin/bash
+
+# Lock file path
+LOCKFILE=/tmp/color_picker.lock
+
+if [ -e "$LOCKFILE" ]; then
+    echo "Script is already running. Exiting."
+    exit 1
+else
+    touch "$LOCKFILE"
+fi
+
+cleanup() {
+    rm -f "$LOCKFILE"
+}
+trap cleanup EXIT
+
+check_dependencies() {
+    ! command -v hyprpicker &>/dev/null &&
+        notify-send -u critical -a "Color Picker" xcolor-pick "hyprpicker needs to be installed" && exit 1
+
+    ! command -v magick &>/dev/null &&
+        notify-send -u critical -a "Color Picker" xcolor-pick "imagemagick needs to be installed" && exit 1
+}
+
+main() {
+    CMD=$(hyprpicker -a -n) || exit 1
+    TMP="/tmp/xcolor_${CMD}.png"
+    TMP_ROUNDED="/tmp/xcolor_${CMD}_rounded.png"
+
+    # Create a square filled with color
+    magick -size 120x120 xc:"$CMD" "$TMP"
+
+    # Create rounded corners mask (circle radius 30)
+    magick convert -size 120x120 xc:none -fill white -draw "roundrectangle 0,0,119,119,30,30" "$TMP_ROUNDED"
+
+    # Apply mask to color square (make corners rounded)
+    magick convert "$TMP" -alpha set -compose CopyOpacity "$TMP_ROUNDED" -composite "$TMP_ROUNDED"
+
+    # Send notification with rounded icon
+    notify-send -a "Color Picker" -i "$TMP_ROUNDED" "Picked Color" "$CMD"
+
+    # Clean up
+    rm -f "$TMP" "$TMP_ROUNDED"
+}
+
+check_dependencies
+main

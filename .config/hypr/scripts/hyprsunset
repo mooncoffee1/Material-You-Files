@@ -1,0 +1,31 @@
+#!/bin/bash
+
+ICON_PATH="$HOME/.config/hypr/scripts/icons/hh1lightbulb.png"
+HYPRSUNSET_CMD="hyprsunset -t 4000"
+
+# Function to clean up hyprsunset on script exit
+cleanup() {
+    killall hyprsunset 2>/dev/null
+    notify-send -h string:x-canonical-private-synchronous:sys-notify -i "$ICON_PATH" "Hyprsunset" "Stopped (cleanup)"
+}
+
+# Trap EXIT signal (script termination)
+trap cleanup EXIT
+
+# Check if hyprsunset is running
+if pgrep -f "$HYPRSUNSET_CMD" > /dev/null; then
+    # If running, kill all hyprsunset instances and exit
+    killall hyprsunset
+    notify-send -h string:x-canonical-private-synchronous:sys-notify -i "$ICON_PATH" "Hyprsunset" "Stopped"
+    exit 0
+else
+    # Start hyprsunset in background
+    $HYPRSUNSET_CMD &
+    notify-send -h string:x-canonical-private-synchronous:sys-notify -i "$ICON_PATH" "Hyprsunset" "Started now"
+
+    # Wait forever (or until script is killed)
+    # This keeps the script running to handle cleanup
+    while true; do
+        sleep 1
+    done
+fi
