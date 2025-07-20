@@ -2,10 +2,10 @@
 
 # Start background services and apps
 #nm-applet &
-dunst &
+mako &
 # poweralertd &
 # wayland-pipewire-idle-inhibit &
-swaync &
+swww-daemon &
 systemctl --user start hyprpolkitagent.service
 hypridle &
 # blueman-applet &
