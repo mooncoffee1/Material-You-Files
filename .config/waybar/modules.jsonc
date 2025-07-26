@@ -167,7 +167,7 @@
     "smooth-scrolling-threshold": 1,
   },
   "pulseaudio#mic": {
-    "format": "{format_source}",
+    "format": " {format_source}",
     "format-source": "󰍬",
     "format-source-muted": "󰍭",
     "tooltip": true,
@@ -177,15 +177,15 @@
     "on-scroll-up": "pactl set-source-volume 0 +1%",
   },
   "pulseaudio#volume": {
-    "format": "{volume}",
+    "format": " {volume}",
     "on-click": "swaync-client -t -sw",
     "tooltip": false,
   },
   "group/connection": {
     "orientation": "inherit",
-    "modules": ["group/network", "group/bluetooth"],
+    "modules": ["group/networks", "group/bluetooth"],
   },
-  "group/network": {
+  "group/networks": {
     "orientation": "inherit",
     "drawer": {
       "transition-duration": 600,
@@ -204,7 +204,7 @@
   "network": {
     "format": "{icon}",
     "tooltip": false,
-        "interval": 2,
+    "interval": 1,
     "format-icons": {
       "wifi": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
       "ethernet": ["󰈁"],
@@ -213,11 +213,11 @@
     "format-wifi": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
     "format-ethernet": "󰈀",
     "format-disconnected": "󰣼",
-    "format-linked": "󰈁",
+    "format-linked": "󰈀",
     "on-click": "kitty nmtui",
   },
   "network#speed": {
-    "format": "{essid}",
+    "format": " {essid}",
     "interval": 5,
     "on-click": "kitty nmtui",
     "tooltip-format": "{ipaddr}",
@@ -454,6 +454,8 @@
 
   "battery": {
     "tooltip": true,
+    "full-at": 100,
+    "design-capacity": false,
     "states": {
       "warning": 25,
       "critical": 15
@@ -461,24 +463,23 @@
     "format": "{icon}",
     "interval": 1,
     "format-icons": {
-    "default":  ["󰁺","󰁻","󰁼","󰁽","󰁾","󰁿","󰂀","󰂁","󰂂"],
-    "charging": ["󰢜", "󰂆", "󰂇", "󰂈", "󰢝", "󰂉", "󰢞", "󰢞", "󰂋"],
-    "warning": "󰂃",
-    "full": "󰁹"
+    "default":  ["󰂎","󰁺","󰁻","󰁼","󰁽","󰁾","󰁿","󰂀","󰂁","󰂂"],
+    "charging": ["󰢟","󰢜","󰂆","󰂇","󰂈","󰢝","󰂉","󰢞","󰢞","󰂋"],
+    "full": "󰁹",
   },
-    "tooltip-format": " 󱟞 {timeTo} | {power} W"
+    "tooltip-format": "󱟞 {timeTo}"
   },
 
   "battery#capacity": {
-        "tooltip": false,
+    "tooltip": true,
+    "design-capacity": false,
+    "full-at": 100,
     "states": {
-      "good": 95,
       "warning": 25,
       "critical": 15
     },
-    "format": "{capacity}",
-    "tooltip-format": " {timeTo} | {power} W"
-
+    "format": " {capacity}",
+    "tooltip-format": "󱟞 {timeTo}"
   },
   "tray": {
     "icon-size": 12,
