@@ -76,16 +76,14 @@
 "hyprland/workspaces": {
 	"format": "{icon}",
 	"format-icons": {
-		"active": "󰮯",
-		"default": "󰊠",
-    "empty": "󱱕"
-
+		"active": "󱱕",
+		"default": "󰧟"
 	},
-    "persistent-workspaces": {
-             "*": 10, // 5 workspaces by default on every monitor
-       }
+	"persistent-workspaces": {
+		"*": 5, // 5 workspaces by default on every monitor
+		"HDMI-A-1": 3 // but only three on HDMI-A-1
+	}
 },
-
   "group/control-center": {
     "orientation": "inherit",
     "on-click": "swaync-client -t -sw",
@@ -482,7 +480,7 @@
     "tooltip-format": "󱟞 {timeTo}"
   },
   "tray": {
-    "icon-size": 12,
+    "icon-size": 13,
     "spacing": 13,
 },
   "power-profiles-daemon": {
@@ -492,7 +490,7 @@
   "format-icons": {
     "default": "󰈐",
     "performance": "󰈸",
-    "balanced": "󱁇",
+    "balanced": "󰠪",
     "power-saver": "󰌪"
   },
 

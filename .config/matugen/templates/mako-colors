@@ -1,6 +1,6 @@
 max-visible=3
 anchor=top-right
-font=Iosevka 10
+font=Rubik 11
 layer=top
 default-timeout=4000
 text-alignment=left
@@ -12,7 +12,7 @@ on-button-right=invoke-default-action
 
 width=360
 height=100
-margin=18,15,0
+margin=5,5,0
 
 icons=1
 markup=1

@@ -2,8 +2,8 @@
 
 
 * {
-  font-family: MaterialDesignIcons, Iosevka;
-  font-size: 14px;
+  font-family: MaterialDesignIcons, Rubik;
+  font-size: 15px;
   border: none;
   border-radius: 0px;
   box-shadow: none;
@@ -67,17 +67,15 @@ tooltip label {
 }
 
 #workspaces button {
-  font-size:smaller;
   border-radius: 16px;
   padding: 0px 4px;
   margin: 3px 1.5px;
-  background-color: transparent;
+  background-color: @surface_container_highest;
   color: @primary;
   animation: ws_normal 20s ease-in-out 1;
 }
 
 #workspaces button.empty {
-  font-size:smaller;
   padding: 0px 4px;
   margin: 3px 1.5px;
   background-color: transparent;
@@ -90,7 +88,7 @@ tooltip label {
   border-radius: 9px;
   background: @on_primary;
   margin: 3px 1.5px;
-  padding: 0px 6px;
+  padding: 0px 4px;
   animation: ws_active 20s ease-in-out 1;
 transition: background-color 300ms cubic-bezier(0.55, -0.68, 0.48, 1.682);
 }
@@ -132,7 +130,7 @@ transition: background-color 300ms cubic-bezier(0.55, -0.68, 0.48, 1.682);
   }
 
 #bluetooth{
-  padding: 0px 2px 0px 5px;
+  padding: 0px 6px 0px 3px;
 
 }
 
@@ -204,16 +202,16 @@ transition: background-color 300ms cubic-bezier(0.55, -0.68, 0.48, 1.682);
   
 }
 
-
 #tray,
 #networks,
 #audio,
 #privacy {
-  padding: 0px 8px;
+  padding: 0px 10px;
 }
 
 #battery {
-  padding: 0px 0px;
+    padding: 0px 0px;
+
 }
 
 #battery.charging {
