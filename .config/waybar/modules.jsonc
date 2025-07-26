@@ -86,8 +86,7 @@
 },
   "group/control-center": {
     "orientation": "inherit",
-    "on-click": "swaync-client -t -sw",
-    "modules": [ "privacy", "tray", "group/audio", "group/connection", "group/batterys"],
+    "modules": [ "tray", "group/audio", "group/networks", "group/batterys"],
   },
   "privacy": {
 	"icon-spacing": 14,
@@ -215,7 +214,7 @@
     "on-click": "kitty nmtui",
   },
   "network#speed": {
-    "format": " {essid}",
+    "format": "{essid}",
     "interval": 5,
     "on-click": "kitty nmtui",
     "tooltip-format": "{ipaddr}",
@@ -470,13 +469,14 @@
 
   "battery#capacity": {
     "tooltip": true,
+        "interval": 1,
     "design-capacity": false,
     "full-at": 100,
     "states": {
       "warning": 25,
       "critical": 15
     },
-    "format": " {capacity}",
+    "format": "{capacity}",
     "tooltip-format": "󱟞 {timeTo}"
   },
   "tray": {

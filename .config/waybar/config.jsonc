@@ -22,7 +22,8 @@
     "custom/gamemode",
     "idle_inhibitor",
     "custom/updates",
-    "power-profiles-daemon"
+    "power-profiles-daemon",
+    "privacy"
   ],
 
   "modules-right": [

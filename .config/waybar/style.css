@@ -36,6 +36,7 @@ tooltip label {
   color: @on_surface;
 }
 
+
 #custom-arrow-right {
   color: @red;
   margin: 10px 4px;
@@ -122,7 +123,7 @@ transition: background-color 300ms cubic-bezier(0.55, -0.68, 0.48, 1.682);
 
 
 #control-center {
-  padding: 4px 10px 4px 0px;
+  padding: 4px 0px 4px 0px;
   margin: 7.9px 2px;
   color: @on_background;
   background: @background;
@@ -165,6 +166,7 @@ transition: background-color 300ms cubic-bezier(0.55, -0.68, 0.48, 1.682);
 #custom-gpu-usage,
 #custom-screenrecorder,
 #gamemode,
+#privacy,
 #mpris,
 #theme-switcher {
   padding: 4px 7px;
@@ -203,18 +205,15 @@ transition: background-color 300ms cubic-bezier(0.55, -0.68, 0.48, 1.682);
 }
 
 #tray,
-#networks,
-#audio,
-#privacy {
-  padding: 0px 10px;
+#battery,
+#network,
+#audio {
+  padding: 0px 5px;
 }
 
-#battery {
-    padding: 0px 0px;
-
-}
 
 #battery.charging {
+  
   color: #c2ca76;
 }
 
@@ -305,11 +304,6 @@ transition: background-color 300ms cubic-bezier(0.55, -0.68, 0.48, 1.682);
   background-color: #2096C0;
 }
 
-#privacy:hover{
-  border-radius: 14px;
-  animation: ws_hover 20s ease-in-out 1;
-  transition: all 0.3s cubic-bezier(.55,-0.68,.48,1.682);
-}
 
 #privacy-item.audio-in{
   color: @secondary;
@@ -317,7 +311,7 @@ transition: background-color 300ms cubic-bezier(0.55, -0.68, 0.48, 1.682);
 
 
 #control-center:hover {
-  padding: 0px 15px 0px 8px;
+  padding: 0px 8px 0px 8px;
   border-radius: 10px;
   margin: 7.9px 2px;
   margin-right: 5px;
